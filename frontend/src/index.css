@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme-aware base tokens: light is the default, dark via the `dark` class on <html>. */
+body {
+  @apply bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 font-body antialiased;
+}
+
+h1,
+h2,
+h3 {
+  @apply font-heading;
+}
+
+/* Reusable theme-aware tokens so screens don't hardcode palette values. */
+@layer components {
+  .surface {
+    @apply bg-zinc-50 dark:bg-zinc-900;
+  }
+  .surface-card {
+    @apply bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800;
+  }
+  .text-muted {
+    @apply text-zinc-600 dark:text-zinc-400;
+  }
+  .text-subtle {
+    @apply text-zinc-500 dark:text-zinc-500;
+  }
+  .divider {
+    @apply border-zinc-200 dark:border-zinc-800;
+  }
+}
+
+/* Visible keyboard focus without affecting mouse users. */
+:focus-visible {
+  outline: 2px solid theme('colors.emerald.500');
+  outline-offset: 2px;
+}
+
+.dark :focus-visible {
+  outline-color: theme('colors.emerald.400');
+}
+
+/* Accessibility: disable animation for users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
